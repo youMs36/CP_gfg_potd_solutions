@@ -1,0 +1,51 @@
+//Integer to Words
+
+public class IntegerToWordsApp
+{
+    public static void main(String args[])
+    {
+         System.out.println("32,765 in words " + convertToWords(32765L)) ;
+    }
+
+    String convertToWords(long n) 
+    {
+        String output = "";
+        output += getWording((int)(n / 10000000), "crore ");
+        output += getWording((int)((n / 100000) % 100), "lakh ");
+        output += getWording((int)((n / 1000) % 100), "thousand ");
+        output += getWording((int)((n / 100) % 10), "hundred ");
+        
+        if (n > 100 && n % 100 > 0) {
+            output += "and ";
+        }
+        
+        output += getWording((int)(n % 100), "");
+        return output;
+    }
+    
+    String getWording(int number, String unit)
+    {
+        String str = "";
+        String one[] = { "", "one ", "two ", "three ", "four ",
+                            "five ", "six ", "seven ", "eight ",
+                            "nine ", "ten ", "eleven ", "twelve ",
+                            "thirteen ", "fourteen ", "fifteen ",
+                            "sixteen ", "seventeen ", "eighteen ",
+                            "nineteen " };
+         String ten[] = { "", "", "twenty ", "thirty ", "forty ",
+                            "fifty ", "sixty ", "seventy ", "eighty ",
+                            "ninety " };
+        if (number > 19) {
+            str += ten[number / 10] + one[number % 10];
+        }
+        else {
+            str += one[number];
+        }
+        
+        if (number != 0) {
+            str += unit;
+        }
+        return str;
+    }
+
+}
